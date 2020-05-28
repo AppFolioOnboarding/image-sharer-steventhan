@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 1 */
 
-import 'jsdom-global/register';
-import Adapter from 'enzyme-adapter-react-16/build/index';
+import '@testing-library/jest-dom/extend-expect';
+import Adapter from 'enzyme-adapter-react-16';
 import { configure } from 'enzyme';
 
 configure({ adapter: new Adapter() });
@@ -16,6 +16,7 @@ process.on('unhandledRejection', (reason, promise) => {
   unhandledRejection = true;
   throw promise;
 });
+
 process.prependListener('exit', (code) => {
   if (unhandledRejection && code === 0) {
     process.exit(1);
