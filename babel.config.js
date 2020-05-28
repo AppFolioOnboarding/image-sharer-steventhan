@@ -41,7 +41,8 @@ module.exports = function(api) {
           development: isDevelopmentEnv || isTestEnv,
           useBuiltIns: true
         }
-      ]
+      ],
+      '@babel/preset-typescript'
     ].filter(Boolean),
     plugins: [
       require('babel-plugin-macros'),
