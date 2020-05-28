@@ -60,14 +60,14 @@ jobs:
       # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
           keys:
-            - v1-npm-install-{{ checksum "package-lock.json" }}
+            - v1-npm-install-{{ checksum "yarn.lock" }}
             - v1-npm-install
 
-      - run: npm install
+      - run: yarn
 
       # Store yarn / webpacker cache
       - save_cache:
-          key: v1-npm-install-{{ checksum "package-lock.json" }}
+          key: v1-npm-install-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
@@ -85,7 +85,7 @@ jobs:
 
       - run:
           name: run react tests
-          command: npm run test
+          command: yarn test
 
       - run:
           name: run rubocop
@@ -93,7 +93,7 @@ jobs:
 
       - run:
           name: run eslint
-          command: npm run lint
+          command: yarn lint
 
       # collect reports
       - store_test_results:
