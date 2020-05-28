@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class ReactControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get react_index_url
+  test "should get app" do
+    get "/"
     assert_response :success
   end
-
 end
