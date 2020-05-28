@@ -1,4 +1,4 @@
 module.exports = {
   verbose: true,
-  setupFilesAfterEnv: ['./app/javascript/test-helpers.ts'],
+  setupFilesAfterEnv: ['./app/javascript/test-helpers.js'],
 };
