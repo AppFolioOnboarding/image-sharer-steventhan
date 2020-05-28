@@ -28,6 +28,7 @@
     "eslint": "^5.15.1",
     "eslint-config-appfolio-react": "^1.1.0",
     "ignore-styles": "^5.0.1",
+    "jest": "^26.0.1",
     "jsdom": "^11.11.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
@@ -40,6 +41,6 @@
   "scripts": {
     "lint": "eslint app/javascript",
     "lint:fix": "eslint app/javascript --fix",
-    "test": "mocha --recursive --compilers js:@babel/register --require app/javascript/testHelpers.js --require ignore-styles app/javascript/**/test"
+    "test": "jest app/javascript"
   }
 }
