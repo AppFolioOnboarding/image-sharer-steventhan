@@ -1,3 +1,3 @@
-var componentRequireContext = require.context("../", true);
-var ReactRailsUJS = require("react_ujs");
+const componentRequireContext = require.context("../", true);
+const ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
