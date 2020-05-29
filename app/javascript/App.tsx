@@ -1,11 +1,8 @@
-import React, { Fragment, FC } from "react";
+import React, { FC } from "react";
+import ImageLinkForm from "./components/ImageLinkForm";
 
-const App: FC = () => {
+export default function App(): JSX.Element {
   return (
-    <Fragment>
-      <h1>Hello test</h1>
-    </Fragment>
+    <ImageLinkForm />
   );
 }
-
-export default App;
