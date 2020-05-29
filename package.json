@@ -6,6 +6,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "webpack": "^4.43.0",
     "react_ujs": "^2.6.1"
   },
   "devDependencies": {
@@ -44,7 +45,6 @@
     "sinon": "^6.0.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.3",
-    "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
