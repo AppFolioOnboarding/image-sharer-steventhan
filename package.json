@@ -51,5 +51,9 @@
     "lint": "eslint app/javascript",
     "lint:fix": "eslint app/javascript --fix",
     "test": "jest app/javascript"
+  },
+  "engines": {
+    "node": "14.3.0",
+    "yarn": "1.22.4"
   }
 }
