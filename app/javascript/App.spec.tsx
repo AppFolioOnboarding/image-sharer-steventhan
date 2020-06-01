@@ -5,5 +5,5 @@ import App from "./App";
 
 test("app renders correctly", () => {
   const { getByText } = render(<App />);
-  expect(getByText(/Hello test/i)).toBeInTheDocument();
+  expect(getByText(/Upload your image link/i)).toBeInTheDocument();
 })
