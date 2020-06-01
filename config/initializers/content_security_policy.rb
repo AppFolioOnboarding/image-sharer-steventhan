@@ -22,7 +22,7 @@ Rails.application.config.content_security_policy do |policy|
   # There is an outstanding issue to hopefully make that unnecessary:
   # https://github.com/twbs/bootstrap/issues/17964
   policy.script_src  :self, :http, 'https://cdnjs.cloudflare.com', 'https://code.jquery.com', 'https://maxcdn.bootstrapcdn.com'
-  policy.style_src   :self, :https, 'https://maxcdn.bootstrapcdn.com'
+  policy.style_src   :self, :https, :unsafe_inline, 'https://maxcdn.bootstrapcdn.com'
 
   # Specify URI for violation reports
   # policy.report_uri "/csp-violation-report-endpoint"
