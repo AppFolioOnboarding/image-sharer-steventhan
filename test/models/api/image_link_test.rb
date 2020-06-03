@@ -3,13 +3,18 @@ require 'test_helper'
 module Api
   class ImageLinkTest < ActiveSupport::TestCase
     test 'fixture count' do
-      assert_equal 2, ImageLink.count
+      assert_equal 4, ImageLink.count
     end
 
     test 'find all' do
       all = ImageLink.all
-      assert_equal 2, all.count
-      urls = ['https://appfolio.com/some_photo.jpg', 'https://google.com/some_photo.jpg']
+      assert_equal 4, all.count
+      urls = [
+        'https://appfolio.com/some_photo.jpg',
+        'https://google.com/some_photo.jpg',
+        'https://image.com/some_photo.jpg',
+        'https://example.com/some_photo.jpg'
+      ]
       assert_equal urls, all.map(&:full_url)
     end
 

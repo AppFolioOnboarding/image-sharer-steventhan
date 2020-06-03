@@ -9,5 +9,17 @@ first:
 second:
   id: 2
   full_url: 'https://google.com/some_photo.jpg'
-  created_at: <%= 5.day.ago.to_s(:db) %>
+  created_at: <%= 4.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+
+third:
+  id: 3
+  full_url: 'https://image.com/some_photo.jpg'
+  created_at: <%= 3.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+
+fourth:
+  id: 4
+  full_url: 'https://example.com/some_photo.jpg'
+  created_at: <%= 2.day.ago.to_s(:db) %>
   updated_at: <%= 5.day.ago.to_s(:db) %>

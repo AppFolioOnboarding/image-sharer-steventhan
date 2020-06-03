@@ -3,11 +3,13 @@ require 'json'
 
 module Api
   class ImageLinksControllerTest < ActionDispatch::IntegrationTest
-    test 'should get all image links' do
+    test 'should get all image links with LIFO order' do
       get api_image_links_url
       assert_response :success
       assert_equal 'application/json', @response.media_type
-      assert_equal 2, JSON.parse(@response.body).length
+      json = JSON.parse(@response.body)
+      assert_equal json[0]['id'], 4
+      assert_equal 4, json.length
     end
 
     test 'should reject invalid param' do
