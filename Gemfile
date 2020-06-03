@@ -50,3 +50,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'httparty', '~> 0.17.0'
+
+gem 'acts-as-taggable-on', '~> 6.0'
