@@ -23,11 +23,13 @@ test("renders images if request succeeds", async () => {
       {
         id: 1,
         full_url: "test",
+        tag_list: ["tags1", "tags2"],
         location: "test",
       },
       {
         id: 2,
         full_url: "test",
+        tag_list: [],
         location: "test",
       },
     ],
