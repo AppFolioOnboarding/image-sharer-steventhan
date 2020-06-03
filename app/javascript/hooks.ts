@@ -22,9 +22,9 @@ interface Action<T> {
   payload?: T;
 }
 
-function initialState<T>(): AsyncState<T> {
+function initialState<T>(initialData: T): AsyncState<T> {
   return {
-    data: null,
+    data: initialData,
     pending: false,
     error: null
   }
@@ -61,9 +61,10 @@ function reducer<T>(state: AsyncState<T>, action: Action<T | Error>): AsyncState
   }
 }
 
-export function useAsyncReducer<T>(): readonly [AsyncState<T>, React.Dispatch<Action<T | Error>>] {
+export function useAsyncReducer<T>(initialData: T = null):
+    readonly [AsyncState<T>, React.Dispatch<Action<T | Error>>] {
   const [state, dispatch] = useReducer<Reducer<AsyncState<T>, Action<T | Error>>>(reducer,
-    initialState<T>());
+    initialState(initialData));
   return [state, dispatch] as const;
 }
 
