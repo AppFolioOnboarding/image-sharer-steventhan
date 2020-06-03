@@ -18,6 +18,24 @@ module Api
       assert_equal 'application/json', @response.media_type
     end
 
+    test 'should reject missing full_url' do
+      params = {
+        tag_list: %w[tag1 tag2]
+      }
+      post api_image_links_url, params: params
+      assert_response 400
+      assert_equal 'application/json', @response.media_type
+    end
+
+    test 'should reject missing tag_list' do
+      params = {
+        full_url: 'https://i.imgur.com/O0N6NyV.jpg'
+      }
+      post api_image_links_url, params: params
+      assert_response 400
+      assert_equal 'application/json', @response.media_type
+    end
+
     test 'should reject invalid link' do
       post api_image_links_url, params: { full_url: 'https://cnn.com/randome.jpeg' }
       assert_response 400
@@ -26,7 +44,11 @@ module Api
 
     test 'should add link to db' do
       assert_difference 'ImageLink.count' do
-        post api_image_links_url, params: { full_url: 'https://i.imgur.com/O0N6NyV.jpg' }
+        params = {
+          full_url: 'https://i.imgur.com/O0N6NyV.jpg',
+          tag_list: %w[tag1 tag2]
+        }
+        post api_image_links_url, params: params
         assert_response 201
         assert_equal 'application/json', @response.media_type
       end
