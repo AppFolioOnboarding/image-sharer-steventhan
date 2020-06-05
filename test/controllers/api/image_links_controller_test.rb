@@ -8,8 +8,8 @@ module Api
       assert_response :success
       assert_equal 'application/json', @response.media_type
       json = JSON.parse(@response.body)
-      assert_equal json[0]['id'], 4
-      assert_equal 4, json.length
+      assert_equal 'https://example.com/some_photo.jpg', json[0]['full_url']
+      assert_equal json.length, 4
     end
 
     test 'should reject invalid param' do
