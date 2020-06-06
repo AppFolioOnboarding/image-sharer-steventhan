@@ -44,7 +44,7 @@ export default function ImageLinkForm(): JSX.Element {
         full_url: link,
         tag_list: tags,
       });
-      history.push(res.data.location);
+      history.push(`/view/${res.data.id}`);
     } catch (e) {
       dispatch({
         type: ActionType.FAILURE,
