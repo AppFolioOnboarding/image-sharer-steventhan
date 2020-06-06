@@ -7,7 +7,6 @@ export interface ImageData {
   id: number;
   tag_list: string[];
   full_url: string;
-  location: string;
 }
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export default function Image({ imageData }: Props): JSX.Element {
-  const { full_url: fullUrl, tag_list: tagList, location } = imageData;
+  const { full_url: fullUrl, tag_list: tagList } = imageData;
   return (
     <Box display="flex" alignItems="center" flexDirection="column">
       <Paper elevation={5} style={{ padding: 20, marginBottom: 10 }}>
@@ -30,10 +29,13 @@ export default function Image({ imageData }: Props): JSX.Element {
           {tagList.map((tag) => (
             <Chip
               key={tag}
+              component={Link}
+              clickable
               style={{ marginLeft: 3, marginBottom: 3 }}
               variant="default"
               color="primary"
               label={tag}
+              to={`/view?tag=${tag}`}
             />
           ))}
         </Box>
@@ -41,7 +43,7 @@ export default function Image({ imageData }: Props): JSX.Element {
           component={Link}
           variant="contained"
           color="secondary"
-          to={location}
+          to={`/view/${imageData.id}`}
           fullWidth
         >
           View
