@@ -24,13 +24,11 @@ test("renders images if request succeeds", async () => {
         id: 1,
         full_url: "test",
         tag_list: ["tags1", "tags2"],
-        location: "test",
       },
       {
         id: 2,
         full_url: "test",
         tag_list: [],
-        location: "test",
       },
     ],
   });
@@ -52,12 +50,10 @@ test("renders error message if request succeeds", async () => {
       {
         id: 1,
         full_url: "test",
-        location: "test",
       },
       {
         id: 2,
         full_url: "test",
-        location: "test",
       },
     ],
   });
@@ -70,6 +66,6 @@ test("renders error message if request succeeds", async () => {
     );
   });
   wrapper.update();
-  expect(wrapper.find('h2').exists()).toBe(true);
-  expect(wrapper.find('h2').text()).toBe("Can't load");
+  expect(wrapper.find("h2").exists()).toBe(true);
+  expect(wrapper.find("h2").text()).toBe("Can't load");
 });

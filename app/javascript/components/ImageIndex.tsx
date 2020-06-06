@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import { Container } from "@material-ui/core";
 import axios from "axios";
 
@@ -6,7 +6,11 @@ import Image, { ImageData } from "./Image";
 import { useAsyncReducer, ActionType } from "../hooks";
 import { IMG_ENDPOINT } from "../constants";
 
-export default function ImageIndex(): JSX.Element {
+interface Props {
+  params?: URLSearchParams
+}
+
+export default function ImageIndex({ params }: Props): JSX.Element {
   const [state, dispatch] = useAsyncReducer<ImageData[]>([]);
   const { data: images, pending, error } = state;
 
@@ -14,13 +18,13 @@ export default function ImageIndex(): JSX.Element {
     (async () => {
       dispatch({ type: ActionType.PENDING });
       try {
-        const res = await axios.get<ImageData[]>(IMG_ENDPOINT);
+        const res = await axios.get<ImageData[]>(IMG_ENDPOINT, { params });
         dispatch({ type: ActionType.SUCCESS, payload: res.data });
       } catch (e) {
         dispatch({ type: ActionType.FAILURE, payload: e });
       }
     })();
-  }, []);
+  }, [params]);
 
   function render() {
     if (pending) {
@@ -30,11 +34,11 @@ export default function ImageIndex(): JSX.Element {
       return <h2>Can&apos;t load</h2>;
     }
     return (
-      <Fragment>
+      <>
         {images.map((imageData) => (
           <Image key={imageData.id} imageData={imageData} />
         ))}
-      </Fragment>
+      </>
     );
   }
 
