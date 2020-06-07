@@ -23,5 +23,10 @@ module Api
         render json: { message: link.errors.full_messages[0] }, status: 400
       end
     end
+
+    def destroy
+      link = ImageLink.find(params[:id])
+      link.destroy
+    end
   end
 end
