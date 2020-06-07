@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Container } from "@material-ui/core";
 import axios from "axios";
 
 import Image, { ImageData } from "./Image";
@@ -7,7 +6,7 @@ import { useAsyncReducer, ActionType } from "../hooks";
 import { IMG_ENDPOINT } from "../constants";
 
 interface Props {
-  params?: URLSearchParams
+  params?: URLSearchParams;
 }
 
 export default function ImageIndex({ params }: Props): JSX.Element {
@@ -42,5 +41,5 @@ export default function ImageIndex({ params }: Props): JSX.Element {
     );
   }
 
-  return <Container maxWidth="md">{render()}</Container>;
+  return render();
 }
