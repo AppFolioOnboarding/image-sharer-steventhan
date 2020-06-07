@@ -3,7 +3,7 @@ module Api
     protect_from_forgery with: :null_session
 
     def index
-      json = Api::ImageLink.all.map do |link|
+      json = Api::ImageLink.order(created_at: :desc).map do |link|
         link.attributes.merge(location: "/view/#{link.id}")
       end
 
