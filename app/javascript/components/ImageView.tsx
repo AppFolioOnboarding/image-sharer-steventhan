@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import { Container } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 
 import { useAsyncReducer, ActionType } from "../hooks";
 import { IMG_ENDPOINT } from "../constants";
@@ -35,7 +35,9 @@ export default function ImageView(): JSX.Element {
 
   return (
     <Container maxWidth="md">
-      <Link to="/">Home </Link>
+      <Button component={Link} variant="contained" color="primary" to="/">
+        Home
+      </Button>
       {data === null ? (
         <h2>loading</h2>
       ) : (
