@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { useStateWithCheck, useAsyncReducer, ActionType } from "../hooks";
 import { IMG_ENDPOINT } from "../constants";
@@ -56,6 +56,15 @@ export default function ImageLinkForm(): JSX.Element {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <Box component="form" onSubmit={handleFormSubmit}>
+          <Button
+            style={styles}
+            component={Link}
+            variant="contained"
+            color="primary"
+            to="/feedback"
+          >
+            Feedback
+          </Button>
           <h2 style={styles}>Upload your image link</h2>
           <Box style={styles}>
             <TextField
