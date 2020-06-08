@@ -34,6 +34,9 @@ export default function ImageView(): JSX.Element {
   }, []);
 
   async function handleDelete() {
+    if (!confirm("Are you sure you want to delete?")) {
+      return;
+    }
     deleteDispatch({ type: ActionType.PENDING });
     try {
       await axios.delete(`${IMG_ENDPOINT}/${imgId}`);

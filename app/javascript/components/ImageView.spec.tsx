@@ -52,13 +52,13 @@ test("updates after fetching img", async () => {
   expect(axiosMock.get).toBeCalledTimes(1);
 });
 
-test("redirects to home after deleting an image", async () => {
+test("should not delete an image if user cancel", async () => {
   axiosMock.get.mockResolvedValueOnce({
     data: {
       full_url: "",
     },
   });
-  axiosMock.delete.mockResolvedValueOnce({});
+  window.confirm = jest.fn().mockImplementation(() => false);
   let wrapper: ReactWrapper;
   await act(async () => {
     wrapper = mount(
@@ -72,6 +72,32 @@ test("redirects to home after deleting an image", async () => {
   await act(async () => {
     button.simulate("click");
   });
+  expect(mockHistoryPush).not.toHaveBeenCalled();
+  expect(axiosMock.delete).not.toHaveBeenCalled();
+});
+
+test("redirects to home after deleting an image", async () => {
+  axiosMock.get.mockResolvedValueOnce({
+    data: {
+      full_url: "",
+    },
+  });
+  axiosMock.delete.mockResolvedValueOnce({});
+  window.confirm = jest.fn().mockImplementation(() => true);
+  let wrapper: ReactWrapper;
+  await act(async () => {
+    wrapper = mount(
+      <StaticRouter location="/view/100">
+        <ImageView />
+      </StaticRouter>
+    );
+  });
+  wrapper.update();
+  const button = wrapper.find("button#imageDelete");
+  await act(async () => {
+    button.simulate("click");
+  });
+  expect(axiosMock.delete).toHaveBeenCalled();
   expect(mockHistoryPush).toBeCalledWith("/");
 });
 
