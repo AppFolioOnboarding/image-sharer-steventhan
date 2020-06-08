@@ -4,6 +4,7 @@ import ImageView from "./components/ImageView";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import TagView from "./components/TagView";
+import FeedbackForm from "./components/FeedbackForm";
 
 /**
  * The main React App element, mainly used for routing
@@ -17,6 +18,9 @@ export default function App(): JSX.Element {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/feedback">
+          <FeedbackForm />
         </Route>
         <Route path="/view/:imgId">
           <ImageView />
