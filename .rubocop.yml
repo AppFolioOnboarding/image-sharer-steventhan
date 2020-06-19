@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
+    - 'db/**/*'
     - 'log/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
@@ -27,4 +28,7 @@ Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/AbcSize:  # bb,rm
   Enabled: false
