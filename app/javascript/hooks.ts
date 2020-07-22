@@ -14,7 +14,7 @@ export enum ActionType {
   RESET,
   PENDING,
   SUCCESS,
-  FAILURE
+  FAILURE,
 }
 
 interface Action<T> {
@@ -26,52 +26,59 @@ function initialState<T>(initialData: T): AsyncState<T> {
   return {
     data: initialData,
     pending: false,
-    error: null
-  }
+    error: null,
+  };
 }
 
-function reducer<T>(state: AsyncState<T>, action: Action<T | Error>): AsyncState<T> {
+function reducer<T>(
+  state: AsyncState<T>,
+  action: Action<T | Error>
+): AsyncState<T> {
   switch (action.type) {
     case ActionType.RESET:
-      return initialState<T>();
+      return initialState<T>(action.payload as T);
 
     case ActionType.PENDING:
       return {
         ...state,
-        pending: true
-      }
+        pending: true,
+      };
 
     case ActionType.SUCCESS:
       return {
         ...state,
         data: action.payload as T,
         error: null,
-        pending: false
-      }
+        pending: false,
+      };
 
     case ActionType.FAILURE:
       return {
         ...state,
         error: action.payload as Error,
-        pending: false
-      }
+        pending: false,
+      };
 
     default:
       return state;
   }
 }
 
-export function useAsyncReducer<T>(initialData: T = null):
-    readonly [AsyncState<T>, React.Dispatch<Action<T | Error>>] {
-  const [state, dispatch] = useReducer<Reducer<AsyncState<T>, Action<T | Error>>>(reducer,
-    initialState(initialData));
+export function useAsyncReducer<T>(
+  initialData: T = null
+): readonly [AsyncState<T>, React.Dispatch<Action<T | Error>>] {
+  const [state, dispatch] = useReducer<
+    Reducer<AsyncState<T>, Action<T | Error>>
+  >(reducer, initialState(initialData));
   return [state, dispatch] as const;
 }
 
 type StateValidator<T> = (state: T) => Error;
 
-export function useStateWithCheck<T>(initialState: T,
-    validateState: StateValidator<T>): readonly [T, Error, (state: T) => void] {
+export function useStateWithCheck<T>(
+  initialState: T,
+  validateState: StateValidator<T>
+): readonly [T, Error, (state: T) => void] {
   const [state, setState] = useState(initialState);
   const [error, setError] = useState<Error>(null);
 

@@ -27,17 +27,17 @@ module Api
       assert_equal 'application/json', @response.media_type
     end
 
-    test 'should reject missing tag_list' do
+    test 'should accept missing tag_list' do
       params = {
         full_url: 'https://i.imgur.com/O0N6NyV.jpg'
       }
       post api_image_links_url, params: params
-      assert_response 400
+      assert_response 201
       assert_equal 'application/json', @response.media_type
     end
 
     test 'should reject invalid link' do
-      post api_image_links_url, params: { full_url: 'https://cnn.com/randome.jpeg' }
+      post api_image_links_url, params: { full_url: 'https://cnn.com/random.jpeg' }
       assert_response 400
       assert_equal 'application/json', @response.media_type
     end

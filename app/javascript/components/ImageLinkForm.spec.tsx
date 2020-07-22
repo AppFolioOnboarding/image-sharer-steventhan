@@ -102,9 +102,9 @@ describe("Form", () => {
   });
 
   it("should redirect to <ImageView /> submission goes thru", async () => {
-    const location = "/view/16";
+    const id = 16;
     axiosMock.post.mockResolvedValueOnce({
-      data: { location },
+      data: { id },
     });
     const input = wrapper.find("input#imageLink");
     const value = "https://google.com";
@@ -114,6 +114,6 @@ describe("Form", () => {
     await act(async () => {
       form.simulate("submit");
     });
-    expect(mockHistoryPush).toHaveBeenCalledWith(location);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/view/${id}`);
   });
 });

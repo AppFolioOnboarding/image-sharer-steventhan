@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Api::ImageLink.create([
+ImageLink.create([
   { full_url: 'https://i.imgur.com/0UebiO5.jpg' },
   { full_url: 'https://i.imgur.com/8YUz4Dd.jpg' },
   { full_url: 'https://i.imgur.com/W0lWBnm.jpg' },
