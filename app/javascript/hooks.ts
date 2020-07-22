@@ -54,7 +54,7 @@ function reducer<T>(
 
     case ActionType.FAILURE:
       return {
-        ...state,
+        data: null,
         error: action.payload as Error,
         pending: false,
       };

@@ -4,23 +4,42 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
-import { Container } from "@material-ui/core";
+import { Container, FormHelperText } from "@material-ui/core";
+import { useAsyncReducer, ActionType } from "../hooks";
+import axios from "axios";
 
-interface ResponseData {
-  id: number;
-  location: string;
-}
+import { FB_ENDPOINT } from "../constants";
 
 const styles = {
   margin: "0.5rem",
 };
 
+const succesStyles = {
+  ...styles,
+  color: "green",
+};
+
 export default function ImageLinkForm(): JSX.Element {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
+  const [state, dispatch] = useAsyncReducer<{ success: boolean }>();
+  const { data, error, pending } = state;
 
   async function handleFormSubmit(fe: FormEvent) {
     fe.preventDefault();
+    dispatch({ type: ActionType.PENDING });
+    try {
+      await axios.post(FB_ENDPOINT, { name, comment });
+      dispatch({ type: ActionType.SUCCESS, payload: { success: true } });
+    } catch (e) {
+      dispatch({
+        type: ActionType.FAILURE,
+        payload: new Error(e.response.data.message),
+      });
+      console.log("here");
+    }
+    setName("");
+    setComment("");
   }
 
   return (
@@ -42,6 +61,7 @@ export default function ImageLinkForm(): JSX.Element {
               <TextField
                 type="text"
                 required
+                disabled={pending}
                 fullWidth
                 id="name"
                 label="Your name"
@@ -54,6 +74,7 @@ export default function ImageLinkForm(): JSX.Element {
             </Box>
             <Box style={styles}>
               <TextField
+                disabled={pending}
                 type="text"
                 multiline
                 rows={7}
@@ -68,17 +89,25 @@ export default function ImageLinkForm(): JSX.Element {
                 }}
               />
             </Box>
+            {error != null && (
+              <FormHelperText style={styles} error>
+                {error.message}
+              </FormHelperText>
+            )}
+            {data?.success && (
+              <FormHelperText style={succesStyles}>Done</FormHelperText>
+            )}
             <Box display="flex" justifyContent="center">
               <Button
-                id="uploadButton"
-                disabled={name === "" || comment === ""}
+                id="feedbackSubmit"
+                disabled={name === "" || comment === "" || pending}
                 size="large"
                 style={{ margin: "0.5rem", width: "20rem" }}
                 type="submit"
                 variant="contained"
                 color="primary"
               >
-                Submit
+                {pending ? "Sumitting..." : "Submit"}
               </Button>
             </Box>
             <Box display="flex" justifyContent="center">
