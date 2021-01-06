@@ -4,7 +4,7 @@
     "@material-ui/lab": "^4.0.0-alpha.55",
     "@types/enzyme": "^3.10.5",
     "autobind-decorator": "^2.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "prop-types": "^15.7.2",
